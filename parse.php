@@ -38,10 +38,11 @@
   // now loop through all the remaining argv elements (which should be the params being sought),
   // and display their values
   for ($i = 2; $i < $argc; $i++) {
+    $this_param_lc = strtolower($argv[$i]);
     // first, does the requested param exist in the populated $configs array?
-    if (array_key_exists(strtolower($argv[$i]), $configs)) {
+    if (array_key_exists($this_param_lc, $configs)) {
       // it does.  is it a boolean?
-      if (array_key_exists(strtolower($configs[strtolower($argv[$i])]), $booleans)) {
+      if (array_key_exists(strtolower($configs[$this_param_lc]), $booleans)) {
         // it is a boolean. so show it, but say that it's a true/false boolean for clarity's sake.
         
         // NOTE: This bit is really the only part of this whole thing that's slightly tricky, 
@@ -68,10 +69,10 @@
         //       which is equivalent to 
         //         some_param = NoPe
 
-        echo $argv[$i] . " : " . $booleans[strtolower($configs[strtolower($argv[$i])])] . " <--- this is a " . (($booleans[strtolower($configs[strtolower($argv[$i])])]) ? "TRUE" : "FALSE") . " boolean value\n";
+        echo $argv[$i] . " : " . $booleans[strtolower($configs[$this_param_lc])] . " <--- this is a " . (($booleans[strtolower($configs[$this_param_lc])]) ? "TRUE" : "FALSE") . " boolean value\n";
       } else {
         // it is not boolean, so okay to display as is.
-        echo $argv[$i] . " : " . $configs[$argv[$i]] . "\n";
+        echo $argv[$i] . " : " . $configs[$this_param_lc] . "\n";
       }
     } else {
       // the requested parameter isn't in the $configs array. 
