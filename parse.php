@@ -39,9 +39,9 @@
   // and display their values
   for ($i = 2; $i < $argc; $i++) {
     // first, does the requested param exist in the populated $configs array?
-    if (array_key_exists($argv[$i], $configs)) {
+    if (array_key_exists(strtolower($argv[$i]), $configs)) {
       // it does.  is it a boolean?
-      if (array_key_exists(strtolower($configs[$argv[$i]]), $booleans)) {
+      if (array_key_exists(strtolower($configs[strtolower($argv[$i])]), $booleans)) {
         // it is a boolean. so show it, but say that it's a true/false boolean for clarity's sake.
         
         // NOTE: This bit is really the only part of this whole thing that's slightly tricky, 
@@ -68,7 +68,7 @@
         //       which is equivalent to 
         //         some_param = NoPe
 
-        echo $argv[$i] . " : " . $booleans[strtolower($configs[$argv[$i]])] . " <--- this is a " . (($booleans[strtolower($configs[$argv[$i]])]) ? "TRUE" : "FALSE") . " boolean value\n";
+        echo $argv[$i] . " : " . $booleans[strtolower($configs[strtolower($argv[$i])])] . " <--- this is a " . (($booleans[strtolower($configs[strtolower($argv[$i])])]) ? "TRUE" : "FALSE") . " boolean value\n";
       } else {
         // it is not boolean, so okay to display as is.
         echo $argv[$i] . " : " . $configs[$argv[$i]] . "\n";
